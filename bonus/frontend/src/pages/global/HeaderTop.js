@@ -13,8 +13,8 @@ import { useProSidebar } from 'react-pro-sidebar';
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { toggleActionTheme } from '../../redux/actions/themeAction';
 import { useTheme } from '@emotion/react';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -59,7 +59,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const HeaderTop = () => {
-
     const { collapseSidebar } = useProSidebar();
     const { palette } = useTheme();
     const dispatch = useDispatch();
@@ -80,10 +79,16 @@ const HeaderTop = () => {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                        component={Link}
+                        to="/"
+                        sx={{ 
+                            flexGrow: 1, 
+                            display: { xs: 'none', sm: 'block' },
+                            textDecoration: 'none',
+                            color: 'inherit'
+                        }}
                     >
-                        HR APP
+                        Home
                     </Typography>
 
                     {/* toggle dark theme */}

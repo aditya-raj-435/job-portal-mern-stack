@@ -5,10 +5,16 @@ const ErrorResponse = require('../utils/errorResponse');
 //create job
 exports.createJob = async (req, res, next) => {
     try {
+        // Format salary to include ₹ if not already present
+        let salary = req.body.salary;
+        if (!salary.includes('₹')) {
+            salary = `₹${salary}`;
+        }
+
         const job = await Job.create({
             title: req.body.title,
             description: req.body.description,
-            salary: req.body.salary,
+            salary: salary,
             location: req.body.location,
             jobType: req.body.jobType,
             user: req.user.id

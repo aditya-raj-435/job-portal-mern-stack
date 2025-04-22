@@ -9,7 +9,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux'
 import { userSignInAction } from '../redux/actions/userAction'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const validationSchema = yup.object({
     email: yup
@@ -29,18 +29,9 @@ const LogIn = () => {
     const navigate = useNavigate();
     const { isAuthenticated, userInfo } = useSelector(state => state.signIn);
     useEffect(() => {
-
         if (isAuthenticated) {
-            if (userInfo.role === 1) {
-                navigate('/admin/dashboard');
-            } else {
-                navigate('/user/dashboard');
-            }
+            navigate('/');  // Navigate to home page after successful login
         }
-
-        // if (isAuthenticated) {
-        //     navigate('/user/dashboard');
-        // }
     }, [isAuthenticated])
 
     const formik = useFormik({
@@ -115,7 +106,16 @@ const LogIn = () => {
                             helperText={formik.touched.password && formik.errors.password}
                         />
 
-                        <Button fullWidth variant="contained" type='submit' >Log In</Button>
+                        <Button fullWidth variant="contained" type='submit' sx={{ mb: 2 }}>Log In</Button>
+                        <Button 
+                            component={Link} 
+                            to="/"
+                            fullWidth 
+                            variant="outlined"
+                            sx={{ color: 'primary.main' }}
+                        >
+                            Back to Home
+                        </Button>
                     </Box>
                 </Box>
             </Box>

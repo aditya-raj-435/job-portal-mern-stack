@@ -1,28 +1,73 @@
-# job-portal-mern-stack
-This is a Full stack job App made with MERN Stack, MUI, Datagrid, cookie, etc.  It is a Youtube series to teach step by step how to make a full stack App
+# Job Portal - MERN Stack Application
 
-##### To use this app: clone this repo, in the root of bonus folder create a .env file with these variables PORT=9000 DATABASE=YOUR_MONGO_URL JWT_SECRET=fidbfbFCDSm1558 NODE_ENV=development if in development mode and NODE_ENV=production if you're deploying your App; after that, run "npm install" in the bonus root folder. Go inside frontend folder in bonus folder, run "npm install "
+A full-stack job portal application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. This application allows employers to post jobs and job seekers to find and apply for positions.
 
-![My Image](bonus/frontend/src/images/jobportaledit.png)
+## Features
 
-![My Image](bonus/frontend/src/images/dashboardjob.png)
+- User Authentication (Login/Register)
+- Job Posting and Management
+- Job Search with Filters
+- Responsive Design
+- Category-based Job Filtering
+- Location-based Job Search
+- Salary Display in Indian Rupees (₹)
+- Modern UI with Material-UI
+- Smooth Animations and Transitions
 
+## Tech Stack
 
+- **Frontend:**
+  - React.js
+  - Material-UI
+  - Redux for State Management
+  - React Router for Navigation
 
-# Features:
-##### - Software Architecture: MVC pattern;
-##### - HOC (High Order Component);
-##### - Dark & Light theme mode with MUI (Material UI);
-##### - Admin & user dashboard, pagination, Datagrid, Download in CSV, etc;
-##### - Open & close dashboard sidebar;
-##### - Admin can create jobs, create category, etc.
-##### - Dashboard Analytic;
-##### - Responsive App / MUI: Material UI;
-##### - User can see his jobs history in user dashboard;
-##### - Log In & Register Form with Formik and Yup for validation;
-##### - Modern authentication system with JWT and cookie;
-##### - Search job, filter jobs by category and location;
-##### - Apply for a job in the single page job, if the user is already log In;
-##### - Toast notification;
+- **Backend:**
+  - Node.js
+  - Express.js
+  - MongoDB
+  - JWT for Authentication
+
+## Getting Started
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. Install dependencies for both frontend and backend:
+   ```bash
+   # Install backend dependencies
+   cd backend
+   npm install
+
+   # Install frontend dependencies
+   cd ../frontend
+   npm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file in the backend directory with:
+   ```
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   ```
+
+4. Run the application:
+   ```bash
+   # Run backend (from backend directory)
+   npm start
+
+   # Run frontend (from frontend directory)
+   npm start
+   ```
+
+## Contributing
+
+Feel free to fork this repository and submit pull requests. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+This project is licensed under the MIT License.
 
 

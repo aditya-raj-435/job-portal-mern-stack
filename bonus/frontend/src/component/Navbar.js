@@ -18,10 +18,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userLogoutAction } from '../redux/actions/userAction';
 import { DarkMode, LightMode } from "@mui/icons-material";
 import { toggleActionTheme } from '../redux/actions/themeAction';
-
+import { keyframes } from '@mui/material/styles';
 
 const pages = ['Home', 'Log In'];
 
+const slideDown = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 const Navbar = () => {
     //show / hide button
@@ -73,14 +92,21 @@ const Navbar = () => {
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
+                            fontFamily: "'Poppins', sans-serif",
+                            fontWeight: 600,
+                            fontSize: '1.5rem',
+                            letterSpacing: '1px',
                             color: 'inherit',
                             textDecoration: 'none',
+                            transition: 'all 0.3s ease',
+                            animation: `${slideDown} 0.5s ease-out`,
+                            '&:hover': {
+                                transform: 'translateY(-2px)',
+                                textShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                            }
                         }}
                     >
-                        JOB PORTAL
+                        CAREER BRIDGE
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -129,34 +155,76 @@ const Navbar = () => {
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.2rem',
+                            fontFamily: "'Poppins', sans-serif",
+                            fontWeight: 600,
+                            fontSize: '1.2rem',
+                            letterSpacing: '1px',
                             color: 'inherit',
-                            textDecoration: 'none',
+                            textDecoration: 'none'
                         }}
                     >
-                        JOB PORTAL
+                        CAREER BRIDGE
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {/* menu desktop */}
-
                         <Button
                             onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', display: 'block' }}>
-                            <Link to="/" style={{ color: 'white', textDecoration: "none" }}>
+                            sx={{ 
+                                my: 2,
+                                color: 'white',
+                                display: 'block',
+                                fontFamily: "'Poppins', sans-serif",
+                                textTransform: 'none',
+                                fontSize: '1rem',
+                                fontWeight: 500,
+                                px: 2,
+                                animation: `${fadeIn} 0.5s ease-out`,
+                                animationDelay: '0.2s',
+                                opacity: 0,
+                                animationFillMode: 'forwards',
+                                '&:hover': {
+                                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                                    transform: 'translateY(-2px)'
+                                }
+                            }}
+                        >
+                            <Link to="/" style={{ 
+                                color: 'white', 
+                                textDecoration: "none",
+                                fontFamily: "'Poppins', sans-serif"
+                            }}>
                                 Home
                             </Link>
                         </Button>
                         <Button
                             onClick={handleCloseNavMenu}
-                            sx={{ my: 2, color: 'white', display: 'block' }}>
-                            <Link to="/register" style={{ color: 'white', textDecoration: "none" }}>
+                            sx={{ 
+                                my: 2,
+                                color: 'white',
+                                display: 'block',
+                                fontFamily: "'Poppins', sans-serif",
+                                textTransform: 'none',
+                                fontSize: '1rem',
+                                fontWeight: 500,
+                                px: 2,
+                                animation: `${fadeIn} 0.5s ease-out`,
+                                animationDelay: '0.4s',
+                                opacity: 0,
+                                animationFillMode: 'forwards',
+                                '&:hover': {
+                                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                                    transform: 'translateY(-2px)'
+                                }
+                            }}
+                        >
+                            <Link to="/register" style={{ 
+                                color: 'white', 
+                                textDecoration: "none",
+                                fontFamily: "'Poppins', sans-serif"
+                            }}>
                                 Register
                             </Link>
                         </Button>
-
-
                     </Box>
                     <IconButton sx={{ mr: 4 }} onClick={() => dispatch(toggleActionTheme())}>
                         {palette.mode === "dark" ? (
@@ -198,26 +266,34 @@ const Navbar = () => {
                             onClose={handleCloseUserMenu}
                         >
 
-
-                            <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/admin/dashboard">Admin Dashboard</Link></Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/user/dashboard">User Dashboard</Link></Typography>
-                            </MenuItem>
+                            {userInfo && (
+                                <MenuItem onClick={handleCloseUserMenu}>
+                                    <Typography textAlign="center">
+                                        <Link 
+                                            style={{ textDecoration: "none", color: palette.secondary.main }} 
+                                            to={userInfo.role === 1 ? "/admin/dashboard" : "/user/dashboard"}
+                                        >
+                                            {userInfo.role === 1 ? "Admin Dashboard" : "Dashboard"}
+                                        </Link>
+                                    </Typography>
+                                </MenuItem>
+                            )}
 
                             {
                                 !userInfo ?
-
                                     <MenuItem onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center"><Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/login">Log In</Link></Typography>
+                                        <Typography textAlign="center">
+                                            <Link style={{ textDecoration: "none", color: palette.secondary.main }} to="/login">
+                                                Log In
+                                            </Link>
+                                        </Typography>
                                     </MenuItem> :
-
                                     <MenuItem onClick={logOutUser}>
-                                        <Typography style={{ textDecoration: "none", color: palette.secondary.main }} textAlign="center">Log Out</Typography>
+                                        <Typography style={{ textDecoration: "none", color: palette.secondary.main }} textAlign="center">
+                                            Log Out
+                                        </Typography>
                                     </MenuItem>
                             }
-
 
                         </Menu>
                     </Box>

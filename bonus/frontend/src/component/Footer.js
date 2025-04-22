@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Typography, Link } from '@mui/material'
 import React from 'react'
 import { useTheme } from '@mui/material/styles';
 
@@ -11,10 +11,35 @@ const Footer = () => {
                 bgcolor: palette.secondary.midNightBlue,
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
+                borderTop: `1px solid ${palette.primary.main}30`
             }}>
-                <Box component='span' sx={{ color: palette.primary.main }}>All rights reserved! 2023.</Box>
-
+                <Typography 
+                    component="div" 
+                    sx={{ 
+                        color: palette.primary.main,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px'
+                    }}
+                >
+                    © 2025 Career Bridge by{' '}
+                    <Link 
+                        href="https://github.com/adityaraj" 
+                        target="_blank"
+                        sx={{ 
+                            color: 'inherit',
+                            textDecoration: 'none',
+                            fontWeight: 'bold',
+                            '&:hover': {
+                                textDecoration: 'underline'
+                            }
+                        }}
+                    >
+                        Aditya Raj
+                    </Link>
+                    . All rights reserved.
+                </Typography>
             </Box>
         </>
     )
