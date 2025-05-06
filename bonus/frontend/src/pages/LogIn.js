@@ -32,7 +32,7 @@ const LogIn = () => {
         if (isAuthenticated) {
             navigate('/');  // Navigate to home page after successful login
         }
-    }, [isAuthenticated])
+    }, [isAuthenticated, navigate])
 
     const formik = useFormik({
         initialValues: {

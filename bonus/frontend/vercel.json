@@ -3,9 +3,10 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/static-build",
+      "use": "@vercel/node",
       "config": {
-        "distDir": "build"
+        "buildCommand": "set \"CI=false\" && react-scripts build",
+        "outputDirectory": "build"
       }
     }
   ],
@@ -14,5 +15,8 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "env": {
+    "CI": "false"
+  }
 } 

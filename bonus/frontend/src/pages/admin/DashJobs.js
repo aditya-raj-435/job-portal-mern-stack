@@ -14,11 +14,11 @@ const DashJobs = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(jobLoadAction())
-    }, []);
+        dispatch(jobLoadAction());
+    }, [dispatch]);
 
     const { success: deleteSuccess } = useSelector(state => state.deleteJob);
-    const { jobs, loading } = useSelector(state => state.loadJobs);
+    const { jobs } = useSelector(state => state.loadJobs);
     let data = [];
     data = (jobs !== undefined && jobs.length > 0) ? jobs : []
 
