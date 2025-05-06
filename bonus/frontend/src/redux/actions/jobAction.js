@@ -18,20 +18,29 @@ import {
     REGISTER_JOB_SUCCESS
 } from "../constants/jobconstant"
 
+// Helper function to handle errors
+const handleError = (error) => {
+    if (error.response && error.response.data && error.response.data.error) {
+        return error.response.data.error;
+    }
+    return 'An error occurred. Please try again.';
+};
 
 export const jobLoadAction = (pageNumber, keyword = '', cat = '', location = '') => async (dispatch) => {
     dispatch({ type: JOB_LOAD_REQUEST });
     try {
-        const { data } = await axios.get(`/api/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`)
+        const { data } = await axios.get(`/api/jobs/show/?pageNumber=${pageNumber}&keyword=${keyword}&cat=${cat}&location=${location}`);
         dispatch({
             type: JOB_LOAD_SUCCESS,
             payload: data
         });
     } catch (error) {
+        const message = handleError(error);
         dispatch({
             type: JOB_LOAD_FAIL,
-            payload: error.response.data.error
+            payload: message
         });
+        toast.error(message);
     }
 }
 
@@ -45,13 +54,14 @@ export const jobLoadSingleAction = (id) => async (dispatch) => {
             payload: data
         });
     } catch (error) {
+        const message = handleError(error);
         dispatch({
             type: JOB_LOAD_SINGLE_FAIL,
-            payload: error.response.data.error
+            payload: message
         });
+        toast.error(message);
     }
 }
-
 
 //delete single job action
 export const deleteSingleJobAction = (job_id) => async (dispatch) => {
@@ -64,14 +74,14 @@ export const deleteSingleJobAction = (job_id) => async (dispatch) => {
         });
         toast.success("Job deleted successfully");
     } catch (error) {
+        const message = handleError(error);
         dispatch({
             type: DELETE_JOB_FAIL,
-            payload: error.response.data.error
+            payload: message
         });
-        toast.error(error.response.data.error);
+        toast.error(message);
     }
 }
-
 
 //edit single job action
 export const editSingleJobAction = (job) => async (dispatch) => {
@@ -84,31 +94,31 @@ export const editSingleJobAction = (job) => async (dispatch) => {
         });
         toast.success("Job updated successfully");
     } catch (error) {
+        const message = handleError(error);
         dispatch({
             type: EDIT_JOB_FAIL,
-            payload: error.response.data.error
+            payload: message
         });
-        toast.error(error.response.data.error);
+        toast.error(message);
     }
 }
 
 // register job action
 export const registerAjobAction = (job) => async (dispatch) => {
     dispatch({ type: REGISTER_JOB_REQUEST })
-
     try {
-        const { data } = await axios.post("/api/job/create", job)
+        const { data } = await axios.post("/api/job/create", job);
         dispatch({
             type: REGISTER_JOB_SUCCESS,
             payload: data
-        })
+        });
         toast.success("Job created successfully");
-
     } catch (error) {
+        const message = handleError(error);
         dispatch({
             type: REGISTER_JOB_FAIL,
-            payload: error.response.data.error
-        })
-        toast.error(error.response.data.error);
+            payload: message
+        });
+        toast.error(message);
     }
 }

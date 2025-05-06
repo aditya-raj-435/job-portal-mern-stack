@@ -4,17 +4,19 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { BrowserRouter } from 'react-router-dom';
+import axios from 'axios';
 
-
-
+// Configure axios defaults
+axios.defaults.withCredentials = true;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
+  <Provider store={store}>
+    <BrowserRouter>
       <App />
-    </Provider>
-  </React.StrictMode>
+    </BrowserRouter>
+  </Provider>
 );
 
 

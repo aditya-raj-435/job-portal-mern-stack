@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 require("dotenv").config();
-var cors = require('cors');
+const cors = require('cors');
 const path = require('path');
 const helmet = require('helmet');
 
@@ -23,9 +23,7 @@ const errorHandler = require("./middleware/error");
 //database connection
 mongoose.connect(process.env.DATABASE, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false
+  useUnifiedTopology: true
 })
   .then(() => console.log("DB connected"))
   .catch((err) => console.log(err));
@@ -40,7 +38,12 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+    origin: process.env.NODE_ENV === 'production' 
+        ? ['https://your-frontend-domain.vercel.app', 'http://localhost:3000']
+        : 'http://localhost:3000',
+    credentials: true
+}));
 // adding security headers
 app.use(
   helmet.contentSecurityPolicy({
