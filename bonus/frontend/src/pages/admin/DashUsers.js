@@ -13,9 +13,10 @@ const DashUsers = () => {
 
     useEffect(() => {
         dispatch(allUserAction());
-    }, [dispatch]);
+    }, []);
 
-    const { users } = useSelector(state => state.allUsers);
+
+    const { users, loading } = useSelector(state => state.allUsers);
     let data = [];
     data = (users !== undefined && users.length > 0) ? users : []
 

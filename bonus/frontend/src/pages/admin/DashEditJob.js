@@ -50,18 +50,18 @@ const DashEditJob = () => {
 
 
     const { jobType } = useSelector(state => state.jobTypeAll);
-    const { job, loading: jobLoading } = useSelector(state => state.singleJob);
+    const { singleJob, loading } = useSelector(state => state.singleJob);
     const { success } = useSelector(state => state.updateJob);
 
     const formik = useFormik({
         initialValues: {
-            _id: job?._id,
-            title: job?.title,
-            description: job?.description,
-            salary: job?.salary,
-            location: job?.location,
-            available: job?.available,
-            jobType: job?.jobType?._id,
+            _id: singleJob?._id,
+            title: singleJob?.title,
+            description: singleJob?.description,
+            salary: singleJob?.salary,
+            location: singleJob?.location,
+            available: singleJob?.available,
+            jobType: singleJob?.jobType?._id,
         },
         validationSchema: validationSchema,
         enableReinitialize: true,
@@ -75,11 +75,13 @@ const DashEditJob = () => {
 
     //redirect after successfull update
     useEffect(() => {
-        if (success) {
-            dispatch(jobLoadSingleAction(id));
-            navigate('/admin/jobs');
+        if (success && success === true) {
+            setTimeout(() => {
+                dispatch({ type: EDIT_JOB_RESET })
+                navigate('/admin/jobs');
+            }, 800)
         }
-    }, [success, dispatch, navigate]);
+    }, [success && success]);
 
 
 

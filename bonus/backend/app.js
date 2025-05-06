@@ -39,9 +39,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production' 
-        ? ['https://your-frontend-domain.vercel.app', 'http://localhost:3000']
-        : 'http://localhost:3000',
+    origin: 'http://localhost:3000',
     credentials: true
 }));
 // adding security headers

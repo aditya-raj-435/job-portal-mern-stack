@@ -20,7 +20,7 @@ const Home = () => {
     useEffect(() => {
         dispatch(jobLoadAction());
         dispatch(jobTypeLoadAction());
-    }, [dispatch]);
+    }, []);
 
     const handleChangeCategory = (e) => {
         setCat(e.target.value);
