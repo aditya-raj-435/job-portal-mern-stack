@@ -62,6 +62,30 @@ A full-stack job portal application built using the MERN (MongoDB, Express.js, R
    npm start
    ```
 
+## Deployment
+
+### Frontend Deployment (Netlify)
+1. Build the frontend:
+   ```bash
+   cd frontend
+   npm run build
+   ```
+2. Deploy to Netlify:
+   - Connect your GitHub repository
+   - Set build command: `npm run build`
+   - Set publish directory: `build`
+
+### Backend Deployment
+1. Set up MongoDB Atlas:
+   - Create a free cluster
+   - Set up database access
+   - Configure network access
+   - Get your connection string
+
+2. Deploy to your preferred platform (Heroku, Vercel, etc.)
+   - Set environment variables
+   - Configure build settings
+
 ## Contributing
 
 Feel free to fork this repository and submit pull requests. For major changes, please open an issue first to discuss what you would like to change.
